@@ -15,6 +15,7 @@
   "author": "Hung-Han (Henry) Chen",
   "main": "index.ts",
   "scripts": {
+    "start": "tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
