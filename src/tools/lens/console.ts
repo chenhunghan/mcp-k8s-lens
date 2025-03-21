@@ -1,5 +1,5 @@
 import { BrowserToolBase } from './base.js';
-import { ToolContext, ToolResponse } from '../common/types.js';
+import { ToolResponse } from '../common/types.js';
 import { createSuccessResponse } from '../common/response.js';
 
 /**
@@ -20,7 +20,7 @@ export class ConsoleLogsTool extends BrowserToolBase {
   /**
    * Execute the console logs tool
    */
-  async execute(args: any, context: ToolContext): Promise<ToolResponse> {
+  async execute(args: any): Promise<ToolResponse> {
     // No need to use safeExecute here as we don't need to interact with the page
     // We're just filtering and returning logs that are already stored
     
