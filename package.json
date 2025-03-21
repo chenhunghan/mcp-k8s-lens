@@ -1,0 +1,30 @@
+{
+  "name": "mcp-k8s-lens",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "MCP server for K8s Lens",
+  "homepage": "https://github.com/chenhunghan/mcp-k8s-lens#readme",
+  "bugs": {
+    "url": "https://github.com/chenhunghan/mcp-k8s-lens/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenhunghan/mcp-k8s-lens.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "Hung-Han (Henry) Chen",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.51.1",
+    "tsx": "^4.19.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11"
+  }
+}
