@@ -1,14 +1,21 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import "donenv/config";
 import { createToolDefinitions } from "./tools";
 import { setupRequestHandlers } from "./requestHandler";
 
 async function run() {
-  const server = new Server({
-    name: "K8s Lens service",
-    version: "0.0.1",
-  });
+  const server = new Server(
+    {
+      name: "K8s Lens service",
+      version: "0.0.1",
+    },
+    {
+      capabilities: {
+        resources: {},
+        tools: {},
+      },
+    }
+  );
 
   const TOOLS = createToolDefinitions();
   setupRequestHandlers(server, TOOLS);
