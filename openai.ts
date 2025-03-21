@@ -23,7 +23,7 @@ try {
     messages: [
       {
         role: "user",
-        content: "Open Lens Desktop, tell me what you see from the logs",
+        content: "Take a screenshot of Lens Desktop main page",
       },
     ],
   });
