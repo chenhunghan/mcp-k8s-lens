@@ -29,4 +29,4 @@ Capture the logs from Lens Desktop renderer process
 
 ## Acknowledge
 
-Mostly inspired by <https://github.com/Automata-Labs-team/MCP-Server-Playwright>
+Mostly inspired by <https://github.com/executeautomation/mcp-playwright>
