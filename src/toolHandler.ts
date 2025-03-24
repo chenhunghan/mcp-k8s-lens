@@ -1,6 +1,5 @@
 import type { ElectronApplication, Page } from "playwright";
 import { _electron as electron } from "playwright";
-import { request } from "playwright";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import type { ToolContext } from "./tools/common/types.js";
 import { ScreenshotTool, ConsoleLogsTool } from "./tools/lens/index.js";
@@ -108,15 +107,6 @@ async function ensureLensDesktop() {
 }
 
 /**
- * Creates a new API request context
- */
-async function ensureApiContext(url: string) {
-  return await request.newContext({
-    baseURL: url,
-  });
-}
-
-/**
  * Initialize all tool instances
  */
 function initializeTools(server: any) {
@@ -202,7 +192,7 @@ export async function handleToolCall(
       case "lens_desktop_screenshot":
         return await screenshotTool.execute(args, context);
       case "lens_desktop_console_logs":
-        return await consoleLogsTool.execute(args, context);
+        return await consoleLogsTool.execute(args);
 
       default:
         return {
