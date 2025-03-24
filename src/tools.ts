@@ -67,10 +67,22 @@ export function createToolDefinitions() {
         required: ["selector"],
       },
     },
+    {
+      name: "lens_space",
+      description: "Fetch one or more Lens Spaces resource(s)",
+      inputSchema: {
+        type: "object",
+        properties: {
+          spaceName: { type: "string", description: "The name of the Lens Space" },
+        },
+        required: [],
+      },
+    },
   ] as const satisfies Tool[];
 }
 
 
 export const TOOLS = [
   "lens_desktop_screenshot",
+  "lens_space",
 ];

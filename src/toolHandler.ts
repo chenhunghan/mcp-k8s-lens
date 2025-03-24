@@ -5,6 +5,7 @@ import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import type { ToolContext } from "./tools/common/types.js";
 import { ScreenshotTool, ConsoleLogsTool, ClickTool } from "./tools/lens/index.js";
 import { TOOLS } from "./tools.js";
+import { SpaceTool } from "./tools/lens/space.js";
 
 // Global state
 let electronApp: ElectronApplication | undefined;
@@ -23,6 +24,7 @@ export function resetState() {
 let screenshotTool: ScreenshotTool;
 let consoleLogsTool: ConsoleLogsTool;
 let clickTool: ClickTool;
+let spaceTool: SpaceTool;
 
 /**
  * Ensures a Lens Desktop instance is launched and returns the page
@@ -118,6 +120,7 @@ function initializeTools(server: any) {
   if (!screenshotTool) screenshotTool = new ScreenshotTool(server);
   if (!consoleLogsTool) consoleLogsTool = new ConsoleLogsTool(server);
   if (!clickTool) clickTool = new ClickTool(server);
+  if (!spaceTool) spaceTool = new SpaceTool(server);
 }
 
 /**
@@ -130,6 +133,8 @@ export async function handleToolCall(
 ): Promise<CallToolResult> {
   // Initialize tools
   initializeTools(server);
+
+  console.log({ args })
 
   // Special case for browser close to ensure it always works
   if (name === "lens_desktop_close") {
@@ -201,6 +206,8 @@ export async function handleToolCall(
         return await consoleLogsTool.execute(args);
       case "lens_desktop_click":
         return await clickTool.execute(args, context);
+      case "lens_space":
+        return await spaceTool.execute(args, context);
 
       default:
         return {
