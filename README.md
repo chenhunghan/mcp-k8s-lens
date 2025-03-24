@@ -14,6 +14,7 @@ A Model Context Protocol server that provides Lens Desktop automation capabiliti
 #### `lens_desktop_screenshot`
 
 Capture screenshots of the entire Lens Desktop page or specific elements
+
 ```javascript
 {
   "name": "screenshot-name",     // required
