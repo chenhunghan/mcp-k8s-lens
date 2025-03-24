@@ -1,8 +1,9 @@
 import type { ElectronApplication, Page } from "playwright";
 import { _electron as electron } from "playwright";
+import { setTimeout } from "timers/promises";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import type { ToolContext } from "./tools/common/types.js";
-import { ScreenshotTool, ConsoleLogsTool } from "./tools/lens/index.js";
+import { ScreenshotTool, ConsoleLogsTool, ClickTool } from "./tools/lens/index.js";
 import { TOOLS } from "./tools.js";
 
 // Global state
@@ -21,6 +22,7 @@ export function resetState() {
 // Tool instances
 let screenshotTool: ScreenshotTool;
 let consoleLogsTool: ConsoleLogsTool;
+let clickTool: ClickTool;
 
 /**
  * Ensures a Lens Desktop instance is launched and returns the page
@@ -43,6 +45,9 @@ async function ensureLensDesktop() {
         electronApp = undefined;
         page = undefined;
       });
+
+      // Wait for Lens Desktop to be ready
+      await setTimeout(5000);
 
       page = electronApp.windows()[0];
 
@@ -112,6 +117,7 @@ async function ensureLensDesktop() {
 function initializeTools(server: any) {
   if (!screenshotTool) screenshotTool = new ScreenshotTool(server);
   if (!consoleLogsTool) consoleLogsTool = new ConsoleLogsTool(server);
+  if (!clickTool) clickTool = new ClickTool(server);
 }
 
 /**
@@ -193,6 +199,8 @@ export async function handleToolCall(
         return await screenshotTool.execute(args, context);
       case "lens_desktop_console_logs":
         return await consoleLogsTool.execute(args);
+      case "lens_desktop_click":
+        return await clickTool.execute(args, context);
 
       default:
         return {

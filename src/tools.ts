@@ -56,6 +56,17 @@ export function createToolDefinitions() {
         required: [],
       },
     },
+    {
+      name: "lens_desktop_click",
+      description: "Click an element on the page",
+      inputSchema: {
+        type: "object",
+        properties: {
+          selector: { type: "string", description: "CSS selector for the element to click" },
+        },
+        required: ["selector"],
+      },
+    },
   ] as const satisfies Tool[];
 }
 
